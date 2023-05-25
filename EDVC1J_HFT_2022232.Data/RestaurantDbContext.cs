@@ -16,11 +16,13 @@ namespace EDVC1J_HFT_2022232.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder
-                .UseLazyLoadingProxies()
-                .UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=
-                                |DataDirectory|\RestaurantDb.mdf;
-                                Integrated Security=True");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder
+                    .UseLazyLoadingProxies()
+                    .UseInMemoryDatabase("restaurant");
+            }
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

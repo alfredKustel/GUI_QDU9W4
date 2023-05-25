@@ -64,6 +64,11 @@ namespace EDVC1J_HFT_2022232.Client
             {
                 items = response.Content.ReadAsAsync<List<T>>().GetAwaiter().GetResult();
             }
+            else
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
             return items;
         }
 
@@ -74,6 +79,11 @@ namespace EDVC1J_HFT_2022232.Client
             if (response.IsSuccessStatusCode)
             {
                 item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+            }
+            else
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
             }
             return item;
         }
@@ -86,6 +96,11 @@ namespace EDVC1J_HFT_2022232.Client
             {
                 item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
             }
+            else
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
             return item;
         }
 
@@ -94,6 +109,11 @@ namespace EDVC1J_HFT_2022232.Client
             HttpResponseMessage response =
                 client.PostAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
 
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
             response.EnsureSuccessStatusCode();
         }
 
@@ -101,6 +121,12 @@ namespace EDVC1J_HFT_2022232.Client
         {
             HttpResponseMessage response =
                 client.DeleteAsync(endpoint + "/" + id.ToString()).GetAwaiter().GetResult();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
 
             response.EnsureSuccessStatusCode();
         }
@@ -110,8 +136,22 @@ namespace EDVC1J_HFT_2022232.Client
             HttpResponseMessage response =
                 client.PutAsJsonAsync(endpoint, item).GetAwaiter().GetResult();
 
+            if (!response.IsSuccessStatusCode)
+            {
+                var error = response.Content.ReadAsAsync<RestExceptionInfo>().GetAwaiter().GetResult();
+                throw new ArgumentException(error.Msg);
+            }
 
             response.EnsureSuccessStatusCode();
         }
+
+    }
+    public class RestExceptionInfo
+    {
+        public RestExceptionInfo()
+        {
+
+        }
+        public string Msg { get; set; }
     }
 }
