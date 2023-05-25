@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDVC1J_HFT_2022232.Client",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDVC1J_HFT_2022232.Models", "EDVC1J_HFT_2022232.Models\EDVC1J_HFT_2022232.Models.csproj", "{851409BB-954F-4E05-9ACC-FBDC3643BB23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDVC1J_HFT_2022232.Logic", "EDVC1J_HFT_2022232.Logic\EDVC1J_HFT_2022232.Logic.csproj", "{08EAC960-DD2E-47DA-A9D5-E115F817DD1F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{851409BB-954F-4E05-9ACC-FBDC3643BB23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{851409BB-954F-4E05-9ACC-FBDC3643BB23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{851409BB-954F-4E05-9ACC-FBDC3643BB23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08EAC960-DD2E-47DA-A9D5-E115F817DD1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08EAC960-DD2E-47DA-A9D5-E115F817DD1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08EAC960-DD2E-47DA-A9D5-E115F817DD1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08EAC960-DD2E-47DA-A9D5-E115F817DD1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
