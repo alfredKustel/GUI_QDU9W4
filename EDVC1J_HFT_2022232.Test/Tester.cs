@@ -140,5 +140,35 @@ namespace EDVC1J_HFT_2022232.Test
             //Assert
             //chefMock.Verify(repository => repository.Delete(id));
         }
+        [Test]
+        public void SushiChefTester()
+        {
+            Assert.That(chefLogic.SushiSeiChefs().Count(), Is.EqualTo(3));
+        }
+
+        [Test]
+        public void FreshShefTester()
+        {
+            Assert.That(chefLogic.FreshChefsFromPinoccio().First().Name, Is.EqualTo("Super Mario"));
+        }
+
+        [Test]
+        public void WhosTheHeadShefTester()
+        {
+            Assert.That(chefLogic.HeadChefOfPeep().First().Name, Is.EqualTo("Németh Krisztián"));
+        }
+
+        [Test]
+        public void PeepReceiptTester()
+        {
+            Assert.That(receiptLogic.PeepReceipts().Count(), Is.EqualTo(2));
+        }
+
+        [Test]
+        public void BadChef()
+        {
+            var q = receiptLogic.FrancoDeMilanReceipts().Count();
+            Assert.That(q, Is.EqualTo(0));
+        }
     }
 }
