@@ -22,10 +22,9 @@ namespace EDVC1J_HFT_2022232.Endpoint
     {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+   
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
             services.AddTransient<IRestaurantLogic, RestaurantLogic>();
             services.AddTransient<IChefLogic, ChefLogic>();
             services.AddTransient<IReceiptLogic, ReceiptLogic>();
@@ -35,6 +34,12 @@ namespace EDVC1J_HFT_2022232.Endpoint
             services.AddTransient<IReceiptRepository, ReceiptRepository>();
 
             services.AddTransient<RestaurantDbContext, RestaurantDbContext>();
+
+            services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MovieDbApp.Endpoint", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
