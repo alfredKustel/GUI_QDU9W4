@@ -10,7 +10,6 @@ namespace EDVC1J_HFT_2022232.Client
 {
     class RestService
     {
-
         HttpClient client;
 
         public RestService(string baseurl, string pingableEndpoint = "swagger")
