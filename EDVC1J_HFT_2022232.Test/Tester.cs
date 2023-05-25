@@ -5,6 +5,7 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EDVC1J_HFT_2022232.Test
 {
@@ -59,6 +60,22 @@ namespace EDVC1J_HFT_2022232.Test
             restaurantLogic = new RestaurantLogic(restaurantMock.Object);
             chefLogic = new ChefLogic(chefMock.Object);
             receiptLogic = new ReceiptLogic(receiptMock.Object);
+        }
+        //getAll
+        [Test]
+        public static void ChefGetAllTest()
+        {
+            //Arrange
+            List<Chef> expresults = chefList;
+
+            //Act
+            var res = chefLogic.GetAll();
+
+            //Assert
+            Assert.That(res.Count, Is.EqualTo(expresults.Count));
+            Assert.That(res, Is.EquivalentTo(expresults));
+            chefMock.Verify(repository => repository.GetAll(), Times.Once);
+            chefMock.Verify(repository => repository.Read(It.IsAny<int>()), Times.Never);
         }
     }
 }
