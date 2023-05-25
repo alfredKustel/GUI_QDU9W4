@@ -94,5 +94,35 @@ namespace EDVC1J_HFT_2022232.Test
             Assert.That(res, Is.EqualTo(chefList[id]));
             chefMock.Verify(x => x.Read(id), Times.Exactly(1));
         }
+        [Test]
+        public static void ReceiptAdderTest()
+        {
+            Receipt newReceipt = new Receipt { ID = 4, Name = "Sushi roll", Price = 2000, ChefID = chefList[2].ID, RestaurantID = restaurantList[0].ID };
+
+            //Arrange
+            receiptMock.Setup(repository => repository.Create(newReceipt));
+
+            //Act
+            receiptLogic.Create(newReceipt);
+
+            //Assert
+            receiptMock.Verify(repository => repository.Create(newReceipt));
+            receiptMock.Verify(repository => repository.Create(newReceipt), Times.Once);
+        }
+        [Test]
+        public static void ChefAdderTest()
+        {
+            Chef newchef = new Chef { ID = 6, Name = "Nakiri Irina", Age = 21, RestaurantID = restaurantList[0].ID };
+
+            //Arrange
+            chefMock.Setup(repository => repository.Create(newchef));
+
+            //Act
+            chefLogic.Create(newchef);
+
+            //Assert
+            chefMock.Verify(repository => repository.Create(newchef));
+            chefMock.Verify(repository => repository.Create(newchef), Times.Once);
+        }
     }
 }
