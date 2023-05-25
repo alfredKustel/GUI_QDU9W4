@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EDVC1J_HFT_2022232.Models\EDVC1J_HFT_2022232.Models.csproj" />
+    <ProjectReference Include="..\EDVC1J_HFT_2022232.Repository\EDVC1J_HFT_2022232.Repository.csproj" />
   </ItemGroup>
 
 </Project>

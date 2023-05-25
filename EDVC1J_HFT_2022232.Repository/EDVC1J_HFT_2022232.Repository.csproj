@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EDVC1J_HFT_2022232.Data\EDVC1J_HFT_2022232.Data.csproj" />
     <ProjectReference Include="..\EDVC1J_HFT_2022232.Models\EDVC1J_HFT_2022232.Models.csproj" />
   </ItemGroup>
 
