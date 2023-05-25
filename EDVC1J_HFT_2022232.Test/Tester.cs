@@ -77,5 +77,22 @@ namespace EDVC1J_HFT_2022232.Test
             chefMock.Verify(repository => repository.GetAll(), Times.Once);
             chefMock.Verify(repository => repository.Read(It.IsAny<int>()), Times.Never);
         }
+        [Test]
+        [TestCase(0)]
+        [TestCase(2)]
+        [TestCase(4)]
+        public static void ChefReadTest(int id)
+        {
+            //Arrange
+            chefMock.Setup(repository => repository.Read(It.Is<int>(id => id >= 0 && id < chefList.Count)))
+                    .Returns(chefList[id]);
+
+            //Act
+            var res = chefLogic.Read(id);
+
+            //Assert
+            Assert.That(res, Is.EqualTo(chefList[id]));
+            chefMock.Verify(x => x.Read(id), Times.Exactly(1));
+        }
     }
 }
