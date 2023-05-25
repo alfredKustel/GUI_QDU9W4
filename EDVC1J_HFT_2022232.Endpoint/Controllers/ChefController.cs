@@ -1,12 +1,8 @@
-﻿using EDVC1J_HFT_2022232.Logic;
+﻿
+using EDVC1J_HFT_2022232.Logic;
 using EDVC1J_HFT_2022232.Models;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using RouteAttribute = Microsoft.AspNetCore.Components.RouteAttribute;
 
 namespace EDVC1J_HFT_2022232.Endpoint.Controllers
 {
