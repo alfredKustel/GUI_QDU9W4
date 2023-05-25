@@ -69,6 +69,24 @@ namespace EDVC1J_HFT_2022232.Data
                     .HasForeignKey(receipt => receipt.ChefID)
                     .OnDelete(DeleteBehavior.Restrict);
             });
+
+            Restaurant sushisei = new Restaurant() { ID = 1, Name = "Sushi Sei" };
+            Restaurant pinoccio = new Restaurant() { ID = 2, Name = "Pinoccio" };
+            Restaurant peep = new Restaurant() { ID = 3, Name = "Pesti Pipi" };
+
+            Chef taku = new Chef() { ID = 1, Name = "FTakumi Aldini", Age = 20, RestaurantID = sushisei.ID };
+            Chef tado = new Chef() { ID = 2, Name = "Franco de Milan", Age = 19, RestaurantID = sushisei.ID };
+            Chef yuki = new Chef() { ID = 3, Name = "Yukihira Soma", Age = 21, RestaurantID = sushisei.ID };
+            Chef kris = new Chef() { ID = 4, Name = "Németh Krisztián", Age = 25, RestaurantID = peep.ID };
+            Chef mario = new Chef() { ID = 5, Name = "Super Mario", Age = 20, RestaurantID = pinoccio.ID };
+
+            Receipt carb = new Receipt() { ID = 1, Name = "Carbonara", Price = 1400, ChefID = taku.ID, RestaurantID = sushisei.ID };
+            Receipt aljaspeep = new Receipt() { ID = 2, Name = "Aljas Pipi", Price = 1590, ChefID = kris.ID, RestaurantID = peep.ID };
+            Receipt luxburi = new Receipt() { ID = 3, Name = "SunEater Burger", Price = 4000, ChefID = kris.ID, RestaurantID = peep.ID };
+
+            modelBuilder.Entity<Restaurant>().HasData(sushisei, pinoccio, peep);
+            modelBuilder.Entity<Chef>().HasData(taku, tado, yuki, kris, mario);
+            modelBuilder.Entity<Receipt>().HasData(carb, aljaspeep, luxburi);
         }
     }
 }
