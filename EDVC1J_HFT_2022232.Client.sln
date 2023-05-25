@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDVC1J_HFT_2022232.Client", "EDVC1J_HFT_2022232.Client\EDVC1J_HFT_2022232.Client.csproj", "{7681D236-6DCF-45AC-AEC7-4EA14CCDBDE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EDVC1J_HFT_2022232.Models", "EDVC1J_HFT_2022232.Models\EDVC1J_HFT_2022232.Models.csproj", "{851409BB-954F-4E05-9ACC-FBDC3643BB23}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7681D236-6DCF-45AC-AEC7-4EA14CCDBDE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7681D236-6DCF-45AC-AEC7-4EA14CCDBDE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7681D236-6DCF-45AC-AEC7-4EA14CCDBDE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7681D236-6DCF-45AC-AEC7-4EA14CCDBDE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{851409BB-954F-4E05-9ACC-FBDC3643BB23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{851409BB-954F-4E05-9ACC-FBDC3643BB23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{851409BB-954F-4E05-9ACC-FBDC3643BB23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{851409BB-954F-4E05-9ACC-FBDC3643BB23}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34952E2A-E922-484E-90FA-D7B7B8F61E83}
+	EndGlobalSection
+EndGlobal
