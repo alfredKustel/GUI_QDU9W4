@@ -124,5 +124,21 @@ namespace EDVC1J_HFT_2022232.Test
             chefMock.Verify(repository => repository.Create(newchef));
             chefMock.Verify(repository => repository.Create(newchef), Times.Once);
         }
+        [Test]
+        [TestCase(0)]
+        public static void ChefUpdaterTest(int id)
+        {
+            Chef newchef = new Chef() { ID = id, Name = "FTakumi Aldini", Age = 21, RestaurantID = restaurantList[0].ID };
+
+            //Arrange
+            chefMock.Setup(repository => repository.Update(newchef)).Verifiable();
+            chefMock.Setup(repository => repository.Read(It.Is<int>(id => id >= 0 && id < chefList.Count))).Returns(chefList[id]);
+
+            //Act
+            chefLogic.Update(newchef);
+
+            //Assert
+            //chefMock.Verify(repository => repository.Delete(id));
+        }
     }
 }
