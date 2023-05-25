@@ -1,108 +1,93 @@
-﻿using EDVC1J_HFT_2022232.Models;
+﻿using ConsoleTools;
+using EDVC1J_HFT_2022232.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace EDVC1J_HFT_2022232.Client
 {
-    class Program
+    internal class Program
     {
+        static RestService rest;
+        static void Create(string entity)
+        {
+            if (entity == "Chef")
+            {
+                Console.Write("Enter Chef Name: ");
+                string name = Console.ReadLine();
+                rest.Post(new Chef() { Name = name }, "chef");
+            }
+        }
+        static void List(string entity)
+        {
+            if (entity == "Chef")
+            {
+                List<Chef> chefs = rest.Get<Chef>("chef");
+                foreach (var item in chefs)
+                {
+                    Console.WriteLine(item.ID + ": " + item.Name);
+                }
+            }
+            Console.ReadLine();
+        }
+        static void Update(string entity)
+        {
+            if (entity == "Chef")
+            {
+                Console.Write("Enter Chef's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Chef one = rest.Get<Chef>(id, "chefs");
+                Console.Write($"New name [old: {one.Name}]: ");
+                string name = Console.ReadLine();
+                one.Name = name;
+                rest.Put(one, "chef");
+            }
+        }
+        static void Delete(string entity)
+        {
+            if (entity == "Chef")
+            {
+                Console.Write("Enter Chef's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "chef");
+            }
+        }
+
         static void Main(string[] args)
         {
-            Thread.Sleep(8000);
+            rest = new RestService("http://localhost:53910/", "movie");
 
-            RestService restService = new RestService("http://localhost:5967");
-            var recipes = restService.Get<Receipt>("receipt");
-            var chefs = restService.Get<Chef>("chef");
-            var restaurants = restService.Get<Restaurant>("restaurant");
-            var q1 = restService.Get<Receipt>("stat/PeepReceipts");
-            var q2 = restService.Get<Chef>("stat/HeadChefOfPeep");
-            var q3 = restService.Get<Receipt>("stat/FrancoDeMilanReceipts");
-            var q4 = restService.Get<Chef>("stat/FreshChefsFromPinoccio");
-            var q5 = restService.Get<Chef>("stat/SushiSeiChefs");
+            var chefSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("List", () => List("Chef"))
+                .Add("Create", () => Create("Chef"))
+                .Add("Delete", () => Delete("Chef"))
+                .Add("Update", () => Update("Chef"))
+                .Add("Exit", ConsoleMenu.Close);
 
-            Console.WriteLine("Menu options: ");
-            Console.WriteLine("1 - Recepies");
-            Console.WriteLine("2 - Chefs");
-            Console.WriteLine("3 - Restaurants");
-            Console.WriteLine("4 - NonC-Methods");
-            Console.WriteLine("5 - C-Method");
-            Console.WriteLine("0 - Exit");
+            var ReceiptSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("List", () => List("Receipt"))
+                .Add("Create", () => Create("Receipt"))
+                .Add("Delete", () => Delete("Receipt"))
+                .Add("Update", () => Update("Receipt"))
+                .Add("Exit", ConsoleMenu.Close);
 
-            Console.WriteLine("Make your choice: ");
-            int menuchoice;
-            do
-            {
-                menuchoice = int.Parse(Console.ReadLine());
 
-                switch (menuchoice)
-                {
+            var RestaurantSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("List", () => List("Restaurant"))
+                .Add("Create", () => Create("Restaurant"))
+                .Add("Delete", () => Delete("Restaurant"))
+                .Add("Update", () => Update("Restaurant"))
+                .Add("Exit", ConsoleMenu.Close);
 
-                    case 1:
-                        Console.Clear();
-                        foreach (var recipe in recipes)
-                        {
-                            Console.WriteLine(recipe.Name);
-                        }
 
-                        break;
-                    case 2:
-                        Console.Clear();
-                        foreach (var chef in chefs)
-                        {
-                            Console.WriteLine(chef.Name);
-                        }
-                        break;
-                    case 3:
-                        Console.Clear();
-                        foreach (var restaurant in restaurants)
-                        {
-                            Console.WriteLine(restaurant.Name);
-                        }
-                        break;
-                    default:
-                        break;
-                    case 4:
-                        Console.Clear();
-                        Console.WriteLine("Pipi recepies: ");
-                        foreach (var result in q1)
-                        {
-                            Console.WriteLine(result.Name);
-                        }
-                        Console.WriteLine();
-                        Console.WriteLine("Pipi headchef: ");
-                        foreach (var result in q2)
-                        {
-                            Console.WriteLine(result.Name);
-                        }
-                        Console.WriteLine();
-                        Console.WriteLine("Franko de Milan recepies: ");
-                        foreach (var result in q3)
-                        {
-                            Console.WriteLine(result.Name);
-                        }
-                        Console.WriteLine();
-                        Console.WriteLine("Pinoccio jungest:");
-                        foreach (var result in q4)
-                        {
-                            Console.WriteLine(result.Name);
-                        }
-                        Console.WriteLine();
-                        Console.WriteLine("Chefs in Sushi Sei: ");
-                        foreach (var result in q5)
-                        {
-                            Console.WriteLine(result.Name);
-                        }
-                        break;
-                    case 5:
-                        Console.Clear();
-                        restService.Post(new Restaurant()
-                        {
-                            Name = "Hamburger",
-                        }, "restaurant");
-                        Console.WriteLine("Restaurant posted");
-                        break;
-                }
-            } while (menuchoice != 0);
+            var menu = new ConsoleMenu(args, level: 0)
+                .Add("Restaurants", () => RestaurantSubMenu.Show())
+                .Add("Chefs", () => chefSubMenu.Show())
+                .Add("Receipts", () => ReceiptSubMenu.Show())
+                .Add("Exit", ConsoleMenu.Close);
+
+            menu.Show();
+
         }
     }
 }
