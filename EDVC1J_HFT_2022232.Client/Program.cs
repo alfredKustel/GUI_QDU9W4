@@ -113,6 +113,58 @@ namespace EDVC1J_HFT_2022232.Client
             }
         }
 
+        static void Stat(string entity)
+        {
+           
+            if (entity == "stat/SushiSeiChefs")
+            {
+                List<Chef> chefs = rest.Get<Chef>("stat/SushiSeiChefs");
+                foreach (var item in chefs)
+                {
+                    Console.WriteLine(item.Name);
+                }
+
+            }
+            if (entity == "FreshChefsFromPinoccio")
+            {
+               List<Chef> chefs2=  rest.Get<Chef>("stat/FreshChefsFromPinoccio");
+                foreach (var item in chefs2)
+                {
+                    Console.WriteLine(item.Name);
+                }
+
+            }
+            if (entity == "FrancoDeMilanReceipts")
+            {
+                List<Receipt> receipt = rest.Get<Receipt>("stat/FrancoDeMilanReceipts");
+                foreach (var item in receipt)
+                {
+                    Console.WriteLine(item.Name);
+                }
+
+            }
+            if (entity == "PeepReceipts")
+            {
+                List<Receipt> receipt2 = rest.Get<Receipt>("stat/PeepReceipts");
+                foreach (var item in receipt2)
+                {
+                    Console.WriteLine(item.Name);
+                }
+
+            }
+            if (entity == "HeadChefOfPeep")
+            {
+                List<Chef> chefs3 = rest.Get<Chef>("stat/HeadChefOfPeep");
+                foreach (var item in chefs3)
+                {
+                    Console.WriteLine(item.Name);
+                }
+
+            }
+
+        }
+
+
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:49326/", "restaurant");
@@ -138,10 +190,18 @@ namespace EDVC1J_HFT_2022232.Client
                 .Add("Update", () => Update("Restaurant"))
                 .Add("Exit", ConsoleMenu.Close);
 
+            var NonCRUDSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("SushiSeiChefs", () => Stat("stat/SushiSeiChefs"))
+                .Add("FreshChefsFromPinoccio", () => Stat("FreshChefsFromPinoccio"))
+                .Add("PeepReceipts", () => Stat("PeepReceipts"))
+                .Add("HeadChefOfPeep", () => Stat("HeadChefOfPeep"))
+                .Add("Exit", ConsoleMenu.Close);
+
             var menu = new ConsoleMenu(args, level: 0)
                 .Add("Chefs", () => chefSubMenu.Show())
                 .Add("Receipts", () => ReceiptSubMenu.Show())
                 .Add("Restaurants", () => RestaurantSubMenu.Show())
+                .Add("nonCRUD Methods", () => NonCRUDSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();
