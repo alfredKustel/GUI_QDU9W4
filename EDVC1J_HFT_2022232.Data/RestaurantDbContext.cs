@@ -85,10 +85,11 @@ namespace EDVC1J_HFT_2022232.Data
             Receipt carb = new Receipt() { ID = 1, Name = "Carbonara", Price = 1400, ChefID = taku.ID, RestaurantID = sushisei.ID };
             Receipt aljaspeep = new Receipt() { ID = 2, Name = "Aljas Pipi", Price = 1590, ChefID = kris.ID, RestaurantID = peep.ID };
             Receipt luxburi = new Receipt() { ID = 3, Name = "SunEater Burger", Price = 4000, ChefID = kris.ID, RestaurantID = peep.ID };
+            Receipt carbonara = new Receipt() { ID = 4, Name = "Carbonara a la spagetti", Price = 4000, ChefID = tado.ID, RestaurantID = sushisei.ID };
 
             modelBuilder.Entity<Restaurant>().HasData(sushisei, pinoccio, peep);
             modelBuilder.Entity<Chef>().HasData(taku, tado, yuki, kris, mario);
-            modelBuilder.Entity<Receipt>().HasData(carb, aljaspeep, luxburi);
+            modelBuilder.Entity<Receipt>().HasData(carb, aljaspeep, luxburi,carbonara);
         }
     }
 }
