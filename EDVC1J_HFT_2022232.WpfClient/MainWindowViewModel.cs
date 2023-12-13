@@ -53,7 +53,7 @@ namespace EDVC1J_HFT_2022232.WpfClient
         public MainWindowViewModel()
         {
 
-            Chefs = new RestCollection<Chef>("http://localhost:49326", "chef");
+            Chefs = new RestCollection<Chef>("http://localhost:49326/", "restaurant");
 
             if (!IsInDesignMode)
             {
