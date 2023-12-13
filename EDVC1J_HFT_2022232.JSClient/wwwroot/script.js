@@ -2,6 +2,11 @@
 let chefs = [];
 let restaurants = [];
 let Receipts = [];
+let SushiSeiChefs = [];
+let FreshChefsFromPinoccios = [];
+let HeadChefOfPeeps = []
+let PeepReceipts = [];
+let FrancoDeMilanReceipts = [];
 let connection = null;
 
 let chefidtoupdate = -1;
@@ -49,6 +54,106 @@ async function start() {
     }
     
 };
+
+async function getSushiSeiChefsdata() {
+    await fetch('http://localhost:49326/stat/SushiSeiChefs')
+        .then(x => x.json())
+        .then(y => {
+            SushiSeiChefs = y;
+            console.log(SushiSeiChefs);
+            //window.onload();
+            displaySushiSeiChefs();
+        });
+}
+
+function displaySushiSeiChefs() {
+    document.getElementById('sushiseiresultarea').innerHTML = "";
+    SushiSeiChefs.forEach(t => {
+        document.getElementById('sushiseiresultarea').innerHTML +=
+            "<tr><td>" + t.id + "</td><td>" + t.name + "</td></tr>";
+           
+    });
+}
+
+async function getFreshChefsFromPinocciodata() {
+    await fetch('http://localhost:49326/stat/FreshChefsFromPinoccio')
+        .then(x => x.json())
+        .then(y => {
+            FreshChefsFromPinoccios = y;
+            console.log(FreshChefsFromPinoccios);
+            //window.onload();
+            displayFreshChefsFromPinoccios();
+        });
+}
+
+function displayFreshChefsFromPinoccios() {
+    document.getElementById('freshfrompinoccioresultarea').innerHTML = "";
+    FreshChefsFromPinoccios.forEach(t => {
+        document.getElementById('freshfrompinoccioresultarea').innerHTML +=
+            "<tr><td>" + t.id + "</td><td>" + t.name + "</td></tr>";
+
+    });
+}
+
+async function getHeadChefOfPeepsdata() {
+    await fetch('http://localhost:49326/stat/HeadChefOfPeep')
+        .then(x => x.json())
+        .then(y => {
+            HeadChefOfPeeps = y;
+            console.log(HeadChefOfPeeps);
+            //window.onload();
+            displayHeadChefOfPeeps();
+        });
+}
+
+function displayHeadChefOfPeeps() {
+    document.getElementById('headofpeepresultarea').innerHTML = "";
+    HeadChefOfPeeps.forEach(t => {
+        document.getElementById('headofpeepresultarea').innerHTML +=
+            "<tr><td>" + t.id + "</td><td>" + t.name + "</td></tr>";
+
+    });
+}
+
+async function getPeepReceiptsdata() {
+    await fetch('http://localhost:49326/stat/PeepReceipts')
+        .then(x => x.json())
+        .then(y => {
+            PeepReceipts = y;
+            console.log(PeepReceipts);
+            //window.onload();
+            displayPeepReceipts();
+        });
+}
+
+function displayPeepReceipts() {
+    document.getElementById('peepreceiptsresultarea').innerHTML = "";
+    PeepReceipts.forEach(t => {
+        document.getElementById('peepreceiptsresultarea').innerHTML +=
+            "<tr><td>" + t.id + "</td><td>" + t.name + "</td></tr>";
+
+    });
+}
+
+async function getFrancoDeMilanReceiptsdata() {
+    await fetch('http://localhost:49326/stat/FrancoDeMilanReceipts')
+        .then(x => x.json())
+        .then(y => {
+            FrancoDeMilanReceipts = y;
+            console.log(FrancoDeMilanReceipts);
+            //window.onload();
+            displayFrancoDeMilanReceipts();
+        });
+}
+
+function displayFrancoDeMilanReceipts() {
+    document.getElementById('francodemilanresultarea').innerHTML = "";
+    FrancoDeMilanReceipts.forEach(t => {
+        document.getElementById('francodemilanresultarea').innerHTML +=
+            "<tr><td>" + t.id + "</td><td>" + t.name + "</td></tr>";
+
+    });
+}
 
 async function getdata() {
     await fetch('http://localhost:49326/restaurant')
