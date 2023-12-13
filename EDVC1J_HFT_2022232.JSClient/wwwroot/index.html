@@ -2,11 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Restaurant UI</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Chef UI</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
     <h1>Chef Catalog</h1>
 
     <div id="formdiv">
@@ -15,13 +14,17 @@
         <button type="button" onclick="create()">Add Chef</button>
     </div>
 
+    <div id="updateformdiv">
+        <label>Chef Name</label>
+        <input type="text" id="chefnametoupdate" />
+        <button type="button" onclick="update()">Update Chef</button>
+    </div>
+
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Age</th>
-                <th>RestaurantID</th>
                 <th>Actions</th>
             </tr>
         </thead>

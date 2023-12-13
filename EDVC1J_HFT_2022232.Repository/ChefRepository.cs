@@ -39,13 +39,18 @@ namespace EDVC1J_HFT_2022232.Repository
 
         public void Update(Chef chef)
         {
-            var chefToUpdate = Read(chef.ID);
-            chefToUpdate.ID = chef.ID;
-            chefToUpdate.Name = chef.Name;
-            chefToUpdate.RestaurantID = chef.RestaurantID;
-            chefToUpdate.Restaurant = chef.Restaurant;
-            chefToUpdate.Specialities = chef.Specialities;
-            chefToUpdate.Age = chef.Age;
+            var old = Read(chef.ID);
+            if (old == null)
+            {
+                throw new ArgumentException("Item not exist..");
+            }
+            foreach (var prop in old.GetType().GetProperties())
+            {
+                if (prop.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
+                {
+                    prop.SetValue(old, prop.GetValue(chef));
+                }
+            }
             dataBase.SaveChanges();
         }
     }

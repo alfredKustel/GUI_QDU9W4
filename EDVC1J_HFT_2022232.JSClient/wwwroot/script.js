@@ -1,29 +1,24 @@
-﻿let chefs = [];
+﻿
+let chefs = [];
 let connection = null;
+
+let chefidtoupdate = -1
+
 getdata();
 setupSignalR();
 
-async function getdata() {
-    await fetch('http://localhost:49326/chef')
-        .then(x => x.json())
-        .then(y => {
-            chefs = y;
-           
-            display();
-        });
-}
 
 function setupSignalR() {
     connection = new signalR.HubConnectionBuilder()
-        .withUrl("http://localhost:53910/hub")
+        .withUrl("http://localhost:49326/hub")
         .configureLogging(signalR.LogLevel.Information)
         .build();
 
-    connection.on("ActorCreated", (user, message) => {
+    connection.on("ChefCreated", (user, message) => {
         getdata();
     });
 
-    connection.on("ActorDeleted", (user, message) => {
+    connection.on("ChefDeleted", (user, message) => {
         getdata();
     });
 
@@ -39,15 +34,67 @@ async function start() {
     try {
         await connection.start();
         console.log("SignalR Connected.");
+        getdata();
     } catch (err) {
         console.log(err);
         setTimeout(start, 5000);
     }
+    
 };
 
+async function getdata() {
+    await fetch('http://localhost:49326/chef')
+        .then(x => x.json())
+        .then(y => {
+            chefs = y;
+            //console.log(chefs);
+            //window.onload();
+            display();
+        });
+}
 
-function remove(id) {
-    fetch('http://localhost:53910/chef' + id, {
+function display() {
+    document.getElementById('resultarea').innerHTML = "";
+    chefs.forEach(t => {
+        document.getElementById('resultarea').innerHTML +=
+            "<tr><td>" + t.id + "</td><td>"
+            + t.name + "</td><td>" +
+                `<button type="button" onclick="removechef(${t.id})">Delete</button>`
+            +
+             `<button type="button" onclick="showupdate(${t.id})">Update</button>`
+            +
+            "</td></tr>";
+    });
+}
+
+function showupdate(id)
+{
+    document.getElementById('chefnametoupdate').value = chefs.find(t => t['id'] == id)['name'];
+    document.getElementById('updateformdiv').style.display = 'flex';
+    chefidtoupdate = id;
+
+}
+
+function update() {
+    document.getElementById('updateformdiv').style.display = 'none';
+    let name = document.getElementById('chefnametoupdate').value;
+    fetch('http://localhost:49326/chef', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(
+            { Name: name , ID : chefidtoupdate})
+    })
+        .then(response => response)
+        .then(data => {
+            console.log('Success:', data);
+            getdata();
+        })
+        .catch((error) => { console.error('Error:', error); });
+
+}
+
+function removechef(id) {
+    fetch('http://localhost:49326/chef/' + id, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json', },
         body: null
@@ -61,26 +108,7 @@ function remove(id) {
 
 }
 
-
-
-function display()
-{
-    document.getElementById('resultarea').innerHTML = "";
-    chefs.forEach(t => {
-        document.getElementById('resultarea').innerHTML +=
-            "<tr><td>" + t.ID + "</td><td>"
-            + t.Name + "</td><td>"
-            + t.Age + "</td><td>"
-        + t.RestaurantID + "</td></td>"
-        +
-        `<button type="button" onclick="remove(${t.ID})">Delete</button>`
-        + "</td></tr>";
-       
-    });
-}
-
-function create()
-{
+function create() {
     let name = document.getElementById('chefname').value;
     fetch('http://localhost:49326/chef', {
         method: 'POST',

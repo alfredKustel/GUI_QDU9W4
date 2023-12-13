@@ -18,11 +18,11 @@ namespace EDVC1J_HFT_2022232.Endpoint.Controllers
     {
         IChefLogic chefLogic;
 
-        IHubContext<SignalRHub> Hub;
+        IHubContext<SignalRHub> hub;
         public ChefController(IChefLogic chefLogic, IHubContext<SignalRHub> hub)
         {
             this.chefLogic = chefLogic;
-            this.Hub = hub;
+            this.hub = hub;
         }
         // GET: /chef
         [HttpGet]
@@ -43,7 +43,7 @@ namespace EDVC1J_HFT_2022232.Endpoint.Controllers
         public void Post([FromBody] Chef value)
         {
             chefLogic.Create(value);
-            this.Hub.Clients.All.SendAsync("ChefCreated",value);
+            this.hub.Clients.All.SendAsync("ChefCreated",value);
         }
 
         // PUT /chef
@@ -51,7 +51,7 @@ namespace EDVC1J_HFT_2022232.Endpoint.Controllers
         public void Put(int id, [FromBody] Chef value)
         {
             chefLogic.Update(value);
-            this.Hub.Clients.All.SendAsync("ChefUpdated", value);
+            this.hub.Clients.All.SendAsync("ChefUpdated", value);
         }
 
         // DELETE /chef/id
@@ -60,7 +60,7 @@ namespace EDVC1J_HFT_2022232.Endpoint.Controllers
         {
             var chefToDelete = this.chefLogic.Read(id);
             chefLogic.Delete(id);
-            this.Hub.Clients.All.SendAsync("ChefDeleted", chefToDelete);
+            this.hub.Clients.All.SendAsync("ChefDeleted", chefToDelete);
         }
     }
 }
