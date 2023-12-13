@@ -1,6 +1,8 @@
-﻿using EDVC1J_HFT_2022232.Logic;
+﻿using EDVC1J_HFT_2022232.Endpoint.services;
+using EDVC1J_HFT_2022232.Logic;
 using EDVC1J_HFT_2022232.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +17,11 @@ namespace EDVC1J_HFT_2022232.Endpoint.Controllers
     public class ReceiptController : ControllerBase
     {
         IReceiptLogic receiptLogic;
-        public ReceiptController(IReceiptLogic receiptLogic)
+        IHubContext<SignalRHub> hub;
+        public ReceiptController(IReceiptLogic receiptLogic, IHubContext<SignalRHub> hub)
         {
             this.receiptLogic = receiptLogic;
+            this.hub = hub;
         }
         // GET: /receipt
         [HttpGet]
@@ -38,20 +42,24 @@ namespace EDVC1J_HFT_2022232.Endpoint.Controllers
         public void Post([FromBody] Receipt value)
         {
             receiptLogic.Create(value);
+            this.hub.Clients.All.SendAsync("ReceiptCreated", value);
         }
 
         // PUT /receipt
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Put(int id, [FromBody] Receipt value)
         {
             receiptLogic.Update(value);
+            this.hub.Clients.All.SendAsync("ReceiptUpdated", value);
         }
 
         // DELETE /receipt/id
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var receiptToDelete = this.receiptLogic.Read(id);
             receiptLogic.Delete(id);
+            this.hub.Clients.All.SendAsync("ReceiptDeleted", receiptToDelete);
         }
     }
 }
