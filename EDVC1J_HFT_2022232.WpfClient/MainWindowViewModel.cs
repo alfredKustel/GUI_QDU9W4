@@ -119,14 +119,14 @@ namespace EDVC1J_HFT_2022232.WpfClient
         {
             rest = new RestService("http://localhost:49326/", "restaurant");
 
-            Chefs = new RestCollection<Chef>("http://localhost:49326/", "chef");
+            Chefs = new RestCollection<Chef>("http://localhost:49326/", "chef", "hub");
             List<Chef> SushiSeiChefs = rest.Get<Chef>("stat/SushiSeiChefs");
             List<Chef> FreshChefsFromPinoccio = rest.Get<Chef>("stat/FreshChefsFromPinoccio");
             List<Chef> HeadChefOfPeep =rest.Get<Chef>("stat/HeadChefOfPeep");
 
-            Restaurants = new RestCollection<Restaurant>("http://localhost:49326/", "restaurant");
+            Restaurants = new RestCollection<Restaurant>("http://localhost:49326/", "restaurant", "hub");
 
-            Receipts = new RestCollection<Receipt>("http://localhost:49326/", "receipt");
+            Receipts = new RestCollection<Receipt>("http://localhost:49326/", "receipt","hub");
             List<Receipt> PeepReceipts = rest.Get<Receipt>("stat/PeepReceipts");
             List<Receipt> FrancoDeMilanReceipts = rest.Get<Receipt>("stat/FrancoDeMilanReceipts");
 

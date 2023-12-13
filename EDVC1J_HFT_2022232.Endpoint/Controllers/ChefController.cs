@@ -1,6 +1,8 @@
-﻿using EDVC1J_HFT_2022232.Logic;
+﻿using EDVC1J_HFT_2022232.Endpoint.services;
+using EDVC1J_HFT_2022232.Logic;
 using EDVC1J_HFT_2022232.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +17,12 @@ namespace EDVC1J_HFT_2022232.Endpoint.Controllers
     public class ChefController : ControllerBase
     {
         IChefLogic chefLogic;
-        public ChefController(IChefLogic chefLogic)
+
+        IHubContext<SignalRHub> Hub;
+        public ChefController(IChefLogic chefLogic, IHubContext<SignalRHub> hub)
         {
             this.chefLogic = chefLogic;
+            this.Hub = hub;
         }
         // GET: /chef
         [HttpGet]
@@ -38,6 +43,7 @@ namespace EDVC1J_HFT_2022232.Endpoint.Controllers
         public void Post([FromBody] Chef value)
         {
             chefLogic.Create(value);
+            this.Hub.Clients.All.SendAsync("ChefCreated",value);
         }
 
         // PUT /chef
@@ -45,13 +51,16 @@ namespace EDVC1J_HFT_2022232.Endpoint.Controllers
         public void Put(int id, [FromBody] Chef value)
         {
             chefLogic.Update(value);
+            this.Hub.Clients.All.SendAsync("ChefUpdated", value);
         }
 
         // DELETE /chef/id
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            var chefToDelete = this.chefLogic.Read(id);
             chefLogic.Delete(id);
+            this.Hub.Clients.All.SendAsync("ChefDeleted", chefToDelete);
         }
     }
 }
