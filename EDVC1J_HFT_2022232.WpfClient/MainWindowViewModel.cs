@@ -98,7 +98,6 @@ namespace EDVC1J_HFT_2022232.WpfClient
         public ICommand CreateRestaurantCommand { get; set; }
         public ICommand DeleteRestaurantCommand { get; set; }
         public ICommand UpdateRestaurantCommand { get; set; }
-        public ICommand UnderstaffedRestaurantCommand { get; set; }
 
         public ICommand CreateReceiptCommand { get; set; }
         public ICommand DeleteReceiptCommand { get; set; }
