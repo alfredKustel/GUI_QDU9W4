@@ -1,4 +1,5 @@
 using EDVC1J_HFT_2022232.Data;
+using EDVC1J_HFT_2022232.Endpoint.services;
 using EDVC1J_HFT_2022232.Logic;
 using EDVC1J_HFT_2022232.Repository;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,8 @@ namespace EDVC1J_HFT_2022232.Endpoint
 
             services.AddTransient<RestaurantDbContext, RestaurantDbContext>();
 
+            services.AddSignalR();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -61,6 +64,11 @@ namespace EDVC1J_HFT_2022232.Endpoint
                 await context.Response.WriteAsJsonAsync(response);
             }));
 
+            app.UseCors(x => x
+                .AllowCredentials()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .WithOrigins("http://localhost:44021"));
 
             app.UseRouting();
 
@@ -69,6 +77,7 @@ namespace EDVC1J_HFT_2022232.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }

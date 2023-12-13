@@ -7,9 +7,29 @@
 </head>
 <body>
 
+    <h1>Chef Catalog</h1>
 
+    <div id="formdiv">
+        <label>Chef Name</label>
+        <input type="text" id="chefname" />
+        <button type="button" onclick="create()">Add Chef</button>
+    </div>
 
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>RestaurantID</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="resultarea">
+        </tbody>
+    </table>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
