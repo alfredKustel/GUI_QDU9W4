@@ -68,14 +68,21 @@ namespace EDVC1J_HFT_2022232.WpfClient
         public ICommand CreateChefCommand { get; set; }
         public ICommand DeleteChefCommand { get; set; }
         public ICommand UpdateChefCommand { get; set; }
+        public ICommand SushiSeiChefsCommand { get; set; }
+        public ICommand FreshChefsFromPinoccioCommand { get; set; }
+        public ICommand HeadChefOfPeepCommand { get; set; }
+
 
         public ICommand CreateRestaurantCommand { get; set; }
         public ICommand DeleteRestaurantCommand { get; set; }
         public ICommand UpdateRestaurantCommand { get; set; }
+        public ICommand UnderstaffedRestaurantCommand { get; set; }
 
         public ICommand CreateReceiptCommand { get; set; }
         public ICommand DeleteReceiptCommand { get; set; }
         public ICommand UpdateReceiptCommand { get; set; }
+        public ICommand FrancoDeMilanReceiptsCommand { get; set; }
+        public ICommand PeepReceiptsCommand { get; set; }
 
         public static bool IsInDesignMode
         {
@@ -126,6 +133,8 @@ namespace EDVC1J_HFT_2022232.WpfClient
                     return SelectedChef != null;
                 });
                 SelectedChef = new Chef();
+
+
 
                 //Restaurants
                 CreateRestaurantCommand = new RelayCommand(() =>
