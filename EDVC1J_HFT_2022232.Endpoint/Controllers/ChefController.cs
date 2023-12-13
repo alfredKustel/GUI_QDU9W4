@@ -47,7 +47,7 @@ namespace EDVC1J_HFT_2022232.Endpoint.Controllers
         }
 
         // PUT /chef
-        [HttpPut("{id}")]
+        [HttpPut]
         public void Put(int id, [FromBody] Chef value)
         {
             chefLogic.Update(value);

@@ -42,11 +42,18 @@ namespace EDVC1J_HFT_2022232.Repository
 
         public void Update(Restaurant restaurant)
         {
-            var restaurantToUpdate = Read(restaurant.ID);
-            restaurantToUpdate.ID = restaurant.ID;
-            restaurantToUpdate.Name = restaurant.Name;
-            restaurantToUpdate.WorkingChefs = restaurant.WorkingChefs;
-            restaurantToUpdate.Menu = restaurant.Menu;
+            var old = Read(restaurant.ID);
+            if (old == null)
+            {
+                throw new ArgumentException("Item not exist..");
+            }
+            foreach (var prop in old.GetType().GetProperties())
+            {
+                if (prop.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
+                {
+                    prop.SetValue(old, prop.GetValue(restaurant));
+                }
+            }
             dataBase.SaveChanges();
         }
     }

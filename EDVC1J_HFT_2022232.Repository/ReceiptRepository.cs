@@ -42,12 +42,18 @@ namespace EDVC1J_HFT_2022232.Repository
 
         public void Update(Receipt receipt)
         {
-            var receiptToUpdate = Read(receipt.ID);
-            receiptToUpdate.ID = receipt.ID;
-            receiptToUpdate.Name = receipt.Name;
-            receiptToUpdate.Price = receipt.Price;
-            receiptToUpdate.Restaurant = receipt.Restaurant;
-            receiptToUpdate.RestaurantID = receipt.RestaurantID;
+            var old = Read(receipt.ID);
+            if (old == null)
+            {
+                throw new ArgumentException("Item not exist..");
+            }
+            foreach (var prop in old.GetType().GetProperties())
+            {
+                if (prop.GetAccessors().FirstOrDefault(t => t.IsVirtual) == null)
+                {
+                    prop.SetValue(old, prop.GetValue(receipt));
+                }
+            }
             dataBase.SaveChanges();
         }
 
