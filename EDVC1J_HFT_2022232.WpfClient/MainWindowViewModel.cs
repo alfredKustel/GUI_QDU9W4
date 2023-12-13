@@ -3,9 +3,11 @@ using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using static EDVC1J_HFT_2022232.WpfClient.Restcollection;
 
@@ -26,31 +28,67 @@ namespace EDVC1J_HFT_2022232.WpfClient
             }
         }
 
+        private string errorMessage;
+
+        public string ErrorMessage
+        {
+            get { return errorMessage; }
+            set { SetProperty(ref errorMessage, value); }
+        }
+
 
         public ICommand CreateChefCommand { get; set; }
         public ICommand DeleteChefCommand { get; set; }
         public ICommand UpdateChefCommand { get; set; }
 
+        public static bool IsInDesignMode
+        {
+            get
+            {
+                var prop = DesignerProperties.IsInDesignModeProperty;
+                return (bool)DependencyPropertyDescriptor.FromProperty(prop, typeof(FrameworkElement)).Metadata.DefaultValue;
+            }
+        }
+
         public MainWindowViewModel()
         {
+
             Chefs = new RestCollection<Chef>("http://localhost:49326", "chef");
 
-            CreateChefCommand = new RelayCommand(() =>
-           {
-               Chefs.Add(new Chef()
-               {
-                   Name = "ASDASD"
-               });
-           });
-            DeleteChefCommand = new RelayCommand(() =>
+            if (!IsInDesignMode)
             {
-                Chefs.Delete(SelectedChef.ID);
-            },
-            () =>
-            {
-                return SelectedChef != null;
-            });
+                CreateChefCommand = new RelayCommand(() =>
+                {
+                    Chefs.Add(new Chef()
+                    {
+                        Name = SelectedChef.Name
+                    });
+                });
 
+
+                UpdateChefCommand = new RelayCommand(() =>
+                {
+                    try
+                    {
+                        Chefs.Update(SelectedChef);
+                    }
+                    catch (ArgumentException ex)
+                    {
+                        ErrorMessage = ex.Message;
+                    }
+                });
+
+                DeleteChefCommand = new RelayCommand(() =>
+                {
+                    Chefs.Delete(SelectedChef.ID);
+                },
+                () =>
+                {
+                    return SelectedChef != null;
+                });
+                SelectedChef = new Chef();
+
+            }
         }
     }
 }

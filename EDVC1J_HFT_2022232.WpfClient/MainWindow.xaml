@@ -14,7 +14,7 @@
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
-        <ListBox ItemsSource="{Binding Chefs}">
+        <ListBox ItemsSource="{Binding Chefs}" SelectedItem="{Binding SelectedChef}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" />
@@ -23,7 +23,7 @@
         </ListBox>
         <StackPanel Grid.Column="1">
             <Label Content="Name" Background="LightBlue" Padding="10" />
-            <TextBox Text="{Binding SelectedChef}" Padding="10" Margin="0,0,0,30" />
+            <TextBox Text="{Binding SelectedChef.Name}" Padding="10" Margin="0,0,0,30" />
             <Button Content="Create Chef" Command="{Binding CreateChefCommand}" Margin="10" Padding="10" />
             <Button Content="Delete Chef" Command="{Binding DeleteChefCommand}" Margin="10" Padding="10" />
             <Button Content="Update Chef" Command="{Binding UpdateChefCommand}" Margin="10" Padding="10" />
