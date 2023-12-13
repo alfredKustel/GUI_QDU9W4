@@ -18,7 +18,7 @@ th {
     background-color: lightblue;
 }
 
-#formdiv {
+#chefformdiv {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
@@ -33,20 +33,63 @@ th {
         font-weight: bolder;
     }
 
-#updateformdiv {
+#updatechefformdiv {
     display: none;
     flex-direction: column;
     margin-bottom: 20px;
 }
 
-    #updateformdiv label, button, input {
+    #updatechefformdiv label, button, input {
         margin: 10px;
         padding: 7px;
     }
 
-    #updateformdiv label {
+    #updatechefformdiv label {
         font-weight: bolder;
     }
+
+#restaurantformdiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#updaterestaurantformdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+    #updaterestaurantformdiv label, button, input {
+    margin: 10px;
+    padding: 7px;
+}
+
+    #updaterestaurantformdiv label {
+        font-weight: bolder;
+    }
+
+#receiptformdiv {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+#updatereceiptformdiv {
+    display: none;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+    #updatereceiptformdiv label, button, input {
+        margin: 10px;
+        padding: 7px;
+    }
+
+    #updatereceiptformdiv label {
+        font-weight: bolder;
+    }
+
+
 
 table button {
     padding: 2px;

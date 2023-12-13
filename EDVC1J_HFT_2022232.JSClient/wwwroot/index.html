@@ -6,18 +6,19 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Chef Catalog</h1>
 
-    <div id="formdiv">
-        <label>Chef Name</label>
-        <input type="text" id="chefname" />
-        <button type="button" onclick="create()">Add Chef</button>
+    <h1>Restaurant Catalog</h1>
+
+    <div id="restaurantformdiv">
+        <label>Restaurant Name</label>
+        <input type="text" id="restaurantname" />
+        <button type="button" onclick="restaurantcreate()">Add Restaurant</button>
     </div>
 
-    <div id="updateformdiv">
-        <label>Chef Name</label>
-        <input type="text" id="chefnametoupdate" />
-        <button type="button" onclick="update()">Update Chef</button>
+    <div id="updaterestaurantformdiv">
+        <label>Restaurant Name</label>
+        <input type="text" id="restaurantnametoupdate" />
+        <button type="button" onclick="restaurantupdate()">Update Restaurant</button>
     </div>
 
     <table>
@@ -28,7 +29,61 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody id="resultarea">
+        <tbody id="restaurantresultarea">
+        </tbody>
+    </table>
+
+    <h1>Chef Catalog</h1>
+
+    <div id="chefformdiv">
+        <label>Chef Name</label>
+        <input type="text" id="chefname" />
+        <button type="button" onclick="chefcreate()">Add Chef</button>
+    </div>
+
+    <div id="updatechefformdiv">
+        <label>Chef Name</label>
+        <input type="text" id="chefnametoupdate" />
+        <button type="button" onclick="cehfupdate()">Update Chef</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="chefresultarea">
+        </tbody>
+    </table>
+
+
+
+    <h1>Receipt Catalog</h1>
+
+    <div id="receiptformdiv">
+        <label>Receipt Name</label>
+        <input type="text" id="receiptname" />
+        <button type="button" onclick="receiptcreate()">Add Receipt</button>
+    </div>
+
+    <div id="updatereceiptformdiv">
+        <label>Receipt Name</label>
+        <input type="text" id="receiptnametoupdate" />
+        <button type="button" onclick="receiptupdate()">Update Receipt</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="receipttresultarea">
         </tbody>
     </table>
 
