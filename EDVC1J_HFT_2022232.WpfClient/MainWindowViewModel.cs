@@ -9,38 +9,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using static EDVC1J_HFT_2022232.WpfClient.Restcollection;
 
 namespace EDVC1J_HFT_2022232.WpfClient
 {
     public class MainWindowViewModel : ObservableRecipient
     {
         public RestCollection<Chef> Chefs { get; set; }
-
-        public RestCollection<Chef> SushiSeiChefs { get; set; }
-
-        public RestCollection<Chef> FreshChefsFromPinoccio { get; set; }
-
-        public RestCollection<Chef> HeadChefOfPeep { get; set; }
-
         public RestCollection<Restaurant> Restaurants { get; set; }
-
         public RestCollection<Receipt> Receipts { get; set; }
-
-        public RestCollection<Receipt> FrancoDeMilanReceipts { get; set; }
-
-        public RestCollection<Receipt> PeepReceipts { get; set; }
-
-        public RestCollection<Chef> ListedChefs { get; set; }
 
         private Chef selectedChef;
 
         public Chef SelectedChef
         {
             get { return selectedChef; }
-            set {
-                SetProperty(ref selectedChef, value);
-                (DeleteChefCommand as RelayCommand).NotifyCanExecuteChanged();
+            set
+            {
+                if (value != null)
+                {
+                    selectedChef = new Chef()
+                    {
+                        Name = value.Name,
+                        ID = value.ID
+                    };
+                    OnPropertyChanged();
+                    (DeleteChefCommand as RelayCommand).NotifyCanExecuteChanged();
+                }
             }
         }
 
@@ -51,8 +45,16 @@ namespace EDVC1J_HFT_2022232.WpfClient
             get { return selectedRestaurant; }
             set
             {
-                SetProperty(ref selectedRestaurant, value);
-                (DeleteRestaurantCommand as RelayCommand).NotifyCanExecuteChanged();
+                if (value != null)
+                {
+                    selectedRestaurant = new Restaurant()
+                    {
+                        Name = value.Name,
+                        ID = value.ID
+                    };
+                    OnPropertyChanged();
+                    (DeleteRestaurantCommand as RelayCommand).NotifyCanExecuteChanged();
+                }
             }
         }
 
@@ -63,8 +65,16 @@ namespace EDVC1J_HFT_2022232.WpfClient
             get { return selectedReceipt; }
             set
             {
-                SetProperty(ref selectedReceipt, value);
-                (DeleteRestaurantCommand as RelayCommand).NotifyCanExecuteChanged();
+                if (value != null)
+                {
+                    selectedReceipt = new Receipt()
+                    {
+                        Name = value.Name,
+                        ID = value.ID
+                    };
+                    OnPropertyChanged();
+                    (DeleteReceiptCommand as RelayCommand).NotifyCanExecuteChanged();
+                }
             }
         }
 
@@ -105,19 +115,21 @@ namespace EDVC1J_HFT_2022232.WpfClient
             }
         }
 
+        public static RestService rest;
         public MainWindowViewModel()
         {
+            rest = new RestService("http://localhost:49326/", "restaurant");
 
             Chefs = new RestCollection<Chef>("http://localhost:49326/", "chef");
-            SushiSeiChefs = new RestCollection<Chef>("http://localhost:49326/", "stat/SushiSeiChefs");
-            FreshChefsFromPinoccio = new RestCollection<Chef>("http://localhost:49326/", "stat/FreshChefsFromPinoccio");
-            HeadChefOfPeep = new RestCollection<Chef>("http://localhost:49326/", "stat/HeadChefOfPeep");
+            List<Chef> SushiSeiChefs = rest.Get<Chef>("stat/SushiSeiChefs");
+            List<Chef> FreshChefsFromPinoccio = rest.Get<Chef>("stat/FreshChefsFromPinoccio");
+            List<Chef> HeadChefOfPeep =rest.Get<Chef>("stat/HeadChefOfPeep");
 
             Restaurants = new RestCollection<Restaurant>("http://localhost:49326/", "restaurant");
 
             Receipts = new RestCollection<Receipt>("http://localhost:49326/", "receipt");
-            PeepReceipts = new RestCollection<Receipt>("http://localhost:49326/", "stat/PeepReceipts");
-            FrancoDeMilanReceipts = new RestCollection<Receipt>("http://localhost:49326/", "stat/FrancoDeMilanReceipts");
+            List<Receipt> PeepReceipts = rest.Get<Receipt>("stat/PeepReceipts");
+            List<Receipt> FrancoDeMilanReceipts = rest.Get<Receipt>("stat/FrancoDeMilanReceipts");
 
 
             if (!IsInDesignMode)
@@ -142,6 +154,7 @@ namespace EDVC1J_HFT_2022232.WpfClient
                     {
                         ErrorMessage = ex.Message;
                     }
+
                 });
 
                 DeleteChefCommand = new RelayCommand(() =>

@@ -10,7 +10,7 @@
         <local:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <ListBox ItemsSource="{Binding ListedItems}" >
+        <ListBox ItemsSource="{Binding ListedReceipts}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" />

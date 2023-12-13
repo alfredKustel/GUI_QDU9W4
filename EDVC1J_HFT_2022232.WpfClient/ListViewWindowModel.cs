@@ -4,31 +4,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static EDVC1J_HFT_2022232.WpfClient.Restcollection;
+
 
 namespace EDVC1J_HFT_2022232.WpfClient
 {
     public class ListViewWindowModel
     {
-        public RestCollection<Chef> Chefs { get; set; }
-        public RestCollection<Receipt> Receipts { get; set; }
+        public List<Chef> ListedChefs { get; set; }
+        public List<Receipt> ListedReceipts { get; set; }
 
 
-        public void Setup(RestCollection<Chef> chef)
+        public void Setup(List<Chef> chef)
         {
-            this.Chefs = chef;
+            this.ListedChefs = chef;
         }
-        public void Setup(RestCollection<Receipt> receipt)
+        public void Setup(List<Receipt> receipt)
         {
-            this.Receipts = receipt;
+            this.ListedReceipts = receipt;
         }
-        public ListViewWindowModel(RestCollection<Chef> chefs)
+        public ListViewWindowModel(List<Chef> chefs)
         {
-       
+
         }
-        public ListViewWindowModel(RestCollection<Receipt> receipts)
+        public ListViewWindowModel(List<Receipt> receipts)
         {
-           
+
         }
     }
     

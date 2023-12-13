@@ -76,8 +76,8 @@ namespace EDVC1J_HFT_2022232.Data
             Restaurant pinoccio = new Restaurant() { ID = 2, Name = "Pinoccio" };
             Restaurant peep = new Restaurant() { ID = 3, Name = "Pesti Pipi" };
 
-            Chef taku = new Chef() { ID = 1, Name = "FTakumi Aldini", Age = 20, RestaurantID = sushisei.ID };
-            Chef tado = new Chef() { ID = 2, Name = "Franco de Milan", Age = 19, RestaurantID = sushisei.ID };
+            Chef taku = new Chef() { ID = 1, Name = "Takumi Aldini", Age = 20, RestaurantID = sushisei.ID };
+            Chef tado = new Chef() { ID = 2, Name = "Franco De Milan", Age = 19, RestaurantID = sushisei.ID };
             Chef yuki = new Chef() { ID = 3, Name = "Yukihira Soma", Age = 21, RestaurantID = sushisei.ID };
             Chef kris = new Chef() { ID = 4, Name = "Németh Krisztián", Age = 25, RestaurantID = peep.ID };
             Chef mario = new Chef() { ID = 5, Name = "Super Mario", Age = 20, RestaurantID = pinoccio.ID };

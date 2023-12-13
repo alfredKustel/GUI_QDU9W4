@@ -26,10 +26,13 @@ namespace EDVC1J_HFT_2022232.Models
         [NotMapped]
         [JsonIgnore]
         public virtual Restaurant Restaurant { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Receipt> Specialities { get; set; }
         public Chef()
         {
             Specialities = new HashSet<Receipt>();
+           
         }
+        
     }
 }

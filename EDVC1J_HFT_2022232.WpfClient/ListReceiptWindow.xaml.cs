@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static EDVC1J_HFT_2022232.WpfClient.Restcollection;
+
 
 namespace EDVC1J_HFT_2022232.WpfClient
 {
@@ -21,11 +21,11 @@ namespace EDVC1J_HFT_2022232.WpfClient
     /// </summary>
     public partial class ListReceiptWindow : Window
     {
-        public ListReceiptWindow(RestCollection<Receipt> items)
+        public ListReceiptWindow(List<Receipt> Receipts)
         {
             InitializeComponent();
-            var vm = new ListViewWindowModel(items);
-            vm.Setup(items);
+            var vm = new ListViewWindowModel(Receipts);
+            vm.Setup(Receipts);
             this.DataContext = vm;
         }
     }

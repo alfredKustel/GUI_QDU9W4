@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="ListWindow" Height="450" Width="800">
     <Grid>
-        <ListBox ItemsSource="{Binding Chefs}" >
+        <ListBox ItemsSource="{Binding ListedChefs}" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding Name}" />
