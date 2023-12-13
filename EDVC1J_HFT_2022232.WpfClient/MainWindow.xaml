@@ -32,7 +32,6 @@
             <TextBox Text="{Binding SelectedRestaurant.Name}" Padding="10" Margin="0,0,0,5" />
             <Button Content="Create Restaurant" Command="{Binding CreateRestaurantCommand}" Margin="10" Padding="10" />
             <Button Content="Delete Restaurant" Command="{Binding DeleteRestaurantCommand}" Margin="10" Padding="10" />
-            <Button Content="Update Restaurant" Command="{Binding UpdaterestaurantCommand}" Margin="10" Padding="10" />
             <Button Content="UnderstaffedRestaurant" Command="{Binding UnderstaffedRestaurantCommand}" Margin="10" Padding="10" />
             <Label Content="{Binding ErrorMessage}" FontSize="18" Foreground="Red" HorizontalContentAlignment="Center" />
         </StackPanel>

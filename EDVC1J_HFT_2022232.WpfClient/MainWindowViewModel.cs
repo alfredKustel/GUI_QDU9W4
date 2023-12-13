@@ -17,9 +17,21 @@ namespace EDVC1J_HFT_2022232.WpfClient
     {
         public RestCollection<Chef> Chefs { get; set; }
 
+        public RestCollection<Chef> SushiSeiChefs { get; set; }
+
+        public RestCollection<Chef> FreshChefsFromPinoccio { get; set; }
+
+        public RestCollection<Chef> HeadChefOfPeep { get; set; }
+
         public RestCollection<Restaurant> Restaurants { get; set; }
 
         public RestCollection<Receipt> Receipts { get; set; }
+
+        public RestCollection<Receipt> FrancoDeMilanReceipts { get; set; }
+
+        public RestCollection<Receipt> PeepReceipts { get; set; }
+
+        public RestCollection<Chef> ListedChefs { get; set; }
 
         private Chef selectedChef;
 
@@ -97,8 +109,16 @@ namespace EDVC1J_HFT_2022232.WpfClient
         {
 
             Chefs = new RestCollection<Chef>("http://localhost:49326/", "chef");
+            SushiSeiChefs = new RestCollection<Chef>("http://localhost:49326/", "stat/SushiSeiChefs");
+            FreshChefsFromPinoccio = new RestCollection<Chef>("http://localhost:49326/", "stat/FreshChefsFromPinoccio");
+            HeadChefOfPeep = new RestCollection<Chef>("http://localhost:49326/", "stat/HeadChefOfPeep");
+
             Restaurants = new RestCollection<Restaurant>("http://localhost:49326/", "restaurant");
+
             Receipts = new RestCollection<Receipt>("http://localhost:49326/", "receipt");
+            PeepReceipts = new RestCollection<Receipt>("http://localhost:49326/", "stat/PeepReceipts");
+            FrancoDeMilanReceipts = new RestCollection<Receipt>("http://localhost:49326/", "stat/FrancoDeMilanReceipts");
+
 
             if (!IsInDesignMode)
             {
@@ -134,6 +154,25 @@ namespace EDVC1J_HFT_2022232.WpfClient
                 });
                 SelectedChef = new Chef();
 
+                SushiSeiChefsCommand = new RelayCommand(() =>
+                {
+                    var vm  = new ListWindow(SushiSeiChefs);
+                    vm.Show();
+                });
+
+                FreshChefsFromPinoccioCommand = new RelayCommand(() =>
+                {
+
+                    var vm = new ListWindow(FreshChefsFromPinoccio);
+                    vm.Show();
+                });
+
+                HeadChefOfPeepCommand = new RelayCommand(() =>
+                {
+
+                    var vm = new ListWindow(HeadChefOfPeep);
+                    vm.Show();
+                });
 
 
                 //Restaurants
@@ -200,6 +239,20 @@ namespace EDVC1J_HFT_2022232.WpfClient
                     return SelectedReceipt != null;
                 });
                 SelectedReceipt = new Receipt();
+
+                FrancoDeMilanReceiptsCommand = new RelayCommand(() =>
+                {
+
+                    var vm = new ListReceiptWindow(FrancoDeMilanReceipts);
+                    vm.Show();
+                });
+
+                PeepReceiptsCommand = new RelayCommand(() =>
+                {
+
+                    var vm = new ListReceiptWindow(PeepReceipts);
+                    vm.Show();
+                });
             }
         }
     }
