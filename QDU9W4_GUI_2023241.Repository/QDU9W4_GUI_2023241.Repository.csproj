@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\QDU9W4_GUI_2023241.Data\QDU9W4_GUI_2023241.Data.csproj" />
+    <ProjectReference Include="..\QDU9W4_GUI_2023241.Models\QDU9W4_GUI_2023241.Models.csproj" />
+  </ItemGroup>
+
+</Project>
